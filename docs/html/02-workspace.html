@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新建审查 - 智能招投标审查平台</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-layout">
+    <!-- 顶部导航栏 -->
+    <header class="topbar">
+      <div class="topbar-logo">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+          <defs>
+            <linearGradient id="shieldMain" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1E5AA8"/>
+              <stop offset="50%" stop-color="#2C7BE5"/>
+              <stop offset="100%" stop-color="#1E5AA8"/>
+            </linearGradient>
+            <linearGradient id="goldBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFD700"/>
+              <stop offset="100%" stop-color="#B8860B"/>
+            </linearGradient>
+            <filter id="shieldShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#1E5AA8" flood-opacity="0.3"/>
+            </filter>
+            <filter id="badgeShadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.25"/>
+            </filter>
+          </defs>
+          <g filter="url(#shieldShadow)">
+            <path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="url(#shieldMain)"/>
+          </g>
+          <path d="M22 2L4 9v10c0 10 8 17 18 17" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+          <path d="M22 36c8.5 0 15-5.5 16-13" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.5"/>
+          <path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <g transform="translate(14, 11)">
+            <path d="M12 0H4a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6l-4-6z" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 0v6h4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 10h6M5 13h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <g filter="url(#badgeShadow)" transform="translate(28, 26)">
+            <circle cx="8" cy="8" r="7" fill="url(#goldBadge)" stroke="#B8860B" stroke-width="0.5"/>
+            <circle cx="8" cy="8" r="5.5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+            <path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>
+        <span class="topbar-title">智能招投标审查平台</span>
+      </div>
+      <div class="topbar-actions">
+        <div class="topbar-user-dropdown">
+          <div class="topbar-user">
+            <div class="topbar-user-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <span class="topbar-user-name">张三</span>
+            <svg class="topbar-user-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+          <div class="topbar-user-menu">
+            <a href="#" class="topbar-user-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+              </svg>
+              修改用户信息
+            </a>
+            <div class="topbar-user-menu-divider"></div>
+            <a href="#" class="topbar-user-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+              </svg>
+              退出
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="main-wrapper">
+      <div class="main-content">
+        <div style="max-width: 720px; margin: 0 auto;">
+
+          <!-- 页面标题 -->
+          <div style="margin-bottom: 28px;">
+            <h1 class="page-title">新建审查</h1>
+            <p class="text-muted mt-8">上传文件，AI自动识别并执行多维度审查</p>
+          </div>
+
+          <!-- 步骤1：上传区域 -->
+          <div class="card" style="padding: 0; margin-bottom: 16px;">
+            <div style="padding: 20px 24px; background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); border-radius: var(--radius) var(--radius) 0 0;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">1</div>
+                <div>
+                  <div style="font-size: 15px; font-weight: 600; color: white;">上传文件</div>
+                  <div style="font-size: 12px; color: rgba(255,255,255,0.8);">拖拽或点击上传 PDF、图片文件</div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 24px;">
+              <!-- 拖拽上传区 -->
+              <div class="upload-area" id="uploadArea" style="min-height: 140px; border: 2px dashed var(--gray-200); border-radius: var(--radius); background: var(--gray-50); cursor: pointer;" onclick="document.getElementById('fileInput').click()">
+                <input type="file" id="fileInput" multiple accept=".pdf,.png,.jpg,.jpeg" style="display:none">
+                <div class="upload-icon" style="width: 56px; height: 56px; border-radius: 12px; background: var(--gray-100); margin-bottom: 12px;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--gray-400)" stroke-width="1.5" width="28" height="28">
+                    <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                  </svg>
+                </div>
+                <p style="font-size: 14px; color: var(--gray-600); margin: 0 0 4px;">点击或拖拽文件到此处上传</p>
+                <p style="font-size: 12px; color: var(--gray-400); margin: 0;">支持 PDF、PNG、JPG，单文件≤500MB</p>
+              </div>
+
+              <!-- 已上传文件列表 -->
+              <div id="fileListContainer" style="margin-top: 16px; display: none;">
+                <div style="font-size: 13px; font-weight: 500; color: var(--gray-600); margin-bottom: 8px;">已上传文件 (<span id="fileCount">0</span>)</div>
+                <div id="fileListContent" style="max-height: 180px; overflow-y: auto;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 步骤2：AI识别结果 -->
+          <div class="card" style="padding: 0; margin-bottom: 16px;" id="recognitionCard">
+            <div style="padding: 20px 24px; background: linear-gradient(135deg, #7c3aed, #a78bfa); border-radius: var(--radius) var(--radius) 0 0;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">2</div>
+                <div>
+                  <div style="font-size: 15px; font-weight: 600; color: white;">AI 智能识别</div>
+                  <div style="font-size: 12px; color: rgba(255,255,255,0.8);">自动分类招标文件和投标文件</div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 24px;">
+              <!-- 空状态 -->
+              <div id="emptyState" style="display: flex; align-items: center; gap: 12px; padding: 16px; background: var(--gray-50); border-radius: var(--radius);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--gray-400)" stroke-width="1.5" width="24" height="24">
+                  <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+                <span style="font-size: 13px; color: var(--gray-500);">上传文件后自动识别</span>
+              </div>
+
+              <!-- 有文件状态 -->
+              <div id="hasFilesState" style="display: none;">
+                <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                  <div style="flex: 1; padding: 14px; background: var(--gray-50); border-radius: var(--radius); text-align: center;">
+                    <div style="font-size: 24px; font-weight: 600; color: var(--gray-800);" id="totalCount">0</div>
+                    <div style="font-size: 12px; color: var(--gray-500);">总文件数</div>
+                  </div>
+                  <div style="flex: 1; padding: 14px; background: var(--primary-lighter); border-radius: var(--radius); text-align: center;">
+                    <div style="font-size: 24px; font-weight: 600; color: var(--primary-color);" id="biddingCount">0</div>
+                    <div style="font-size: 12px; color: var(--primary-color);">招标文件</div>
+                  </div>
+                  <div style="flex: 1; padding: 14px; background: var(--success-bg); border-radius: var(--radius); text-align: center;">
+                    <div style="font-size: 24px; font-weight: 600; color: var(--success);" id="tenderCount">0</div>
+                    <div style="font-size: 12px; color: var(--success);">投标文件</div>
+                  </div>
+                </div>
+                <div style="font-size: 12px; color: var(--gray-500);">点击文件可修改类型</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 步骤3：审核配置 -->
+          <div class="card" style="padding: 0; margin-bottom: 24px;">
+            <div style="padding: 20px 24px; background: linear-gradient(135deg, var(--warning), #FBBF24); border-radius: var(--radius) var(--radius) 0 0;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">3</div>
+                <div>
+                  <div style="font-size: 15px; font-weight: 600; color: white;">审核配置</div>
+                  <div style="font-size: 12px; color: rgba(255,255,255,0.8);">选择需要执行的审查项目</div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 20px 24px;">
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                <label class="review-config-item">
+                  <input type="checkbox" id="configBidding" checked>
+                  <div class="review-config-box">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--primary-lighter); display: flex; align-items: center; justify-content: center;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2" width="16" height="16">
+                          <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                      </div>
+                      <span style="font-size: 14px; color: var(--gray-700);">招标文件检测</span>
+                    </div>
+                    <div class="review-config-check"></div>
+                  </div>
+                </label>
+
+                <label class="review-config-item">
+                  <input type="checkbox" id="configCollusion" checked>
+                  <div class="review-config-box">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(239, 68, 68, 0.1); display: flex; align-items: center; justify-content: center;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" width="16" height="16">
+                          <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                      </div>
+                      <span style="font-size: 14px; color: var(--gray-700);">围串标检测</span>
+                    </div>
+                    <div class="review-config-check"></div>
+                  </div>
+                </label>
+
+                <label class="review-config-item">
+                  <input type="checkbox" id="configQualification" checked>
+                  <div class="review-config-box">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(34, 197, 94, 0.1); display: flex; align-items: center; justify-content: center;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" width="16" height="16">
+                          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                        </svg>
+                      </div>
+                      <span style="font-size: 14px; color: var(--gray-700);">资质核验</span>
+                    </div>
+                    <div class="review-config-check"></div>
+                  </div>
+                </label>
+
+                <label class="review-config-item">
+                  <input type="checkbox" id="configResponse" checked>
+                  <div class="review-config-box">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(139, 92, 246, 0.1); display: flex; align-items: center; justify-content: center;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" width="16" height="16">
+                          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                      </div>
+                      <span style="font-size: 14px; color: var(--gray-700);">响应比对</span>
+                    </div>
+                    <div class="review-config-check"></div>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 操作按钮 -->
+          <div style="display: flex; gap: 12px; justify-content: flex-end;">
+            <a href="index.html" class="btn btn-secondary" style="padding: 12px 24px;">
+              返回首页
+            </a>
+            <button id="startReviewBtn" class="btn btn-primary" style="padding: 12px 32px; font-size: 15px; opacity: 0.5; cursor: not-allowed;" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="margin-right: 6px;">
+                <path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              开始审查
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <style>
+    .upload-area {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .upload-area:hover, .upload-area.dragover {
+      border-color: var(--primary-color);
+      background: var(--primary-lighter);
+    }
+    .upload-area.dragover .upload-icon {
+      background: var(--primary-color);
+    }
+    .upload-area.dragover .upload-icon svg {
+      stroke: white;
+    }
+    .review-config-item {
+      cursor: pointer;
+      display: block;
+    }
+    .review-config-item input {
+      display: none;
+    }
+    .review-config-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      transition: all 0.2s;
+    }
+    .review-config-item:hover .review-config-box {
+      border-color: var(--primary-color);
+      background: var(--primary-lighter);
+    }
+    .review-config-item input:checked + .review-config-box {
+      border-color: var(--primary-color);
+      background: var(--primary-lighter);
+    }
+    .review-config-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gray-300);
+      transition: all 0.2s;
+    }
+    .review-config-item input:checked + .review-config-box .review-config-check {
+      background: var(--primary-color);
+    }
+    .review-config-item input:checked + .review-config-box .review-config-check::after {
+      content: '✓';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    let uploadedFiles = [];
+
+    const fileInput = document.getElementById('fileInput');
+    const uploadArea = document.getElementById('uploadArea');
+    const fileListContainer = document.getElementById('fileListContainer');
+    const fileListContent = document.getElementById('fileListContent');
+    const fileCount = document.getElementById('fileCount');
+    const emptyState = document.getElementById('emptyState');
+    const hasFilesState = document.getElementById('hasFilesState');
+    const totalCount = document.getElementById('totalCount');
+    const biddingCount = document.getElementById('biddingCount');
+    const tenderCount = document.getElementById('tenderCount');
+    const startReviewBtn = document.getElementById('startReviewBtn');
+
+    // 拖拽上传
+    uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.classList.add('dragover');
+    });
+    uploadArea.addEventListener('dragleave', () => {
+      uploadArea.classList.remove('dragover');
+    });
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove('dragover');
+      handleFiles(e.dataTransfer.files);
+    });
+    fileInput.addEventListener('change', (e) => {
+      handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+      Array.from(files).forEach(file => {
+        const fileType = recognizeFileType(file.name);
+        uploadedFiles.push({
+          id: Date.now() + Math.random(),
+          name: file.name,
+          size: formatFileSize(file.size),
+          type: fileType
+        });
+      });
+      updateUI();
+    }
+
+    function recognizeFileType(filename) {
+      const lower = filename.toLowerCase();
+      if (lower.includes('招标') || lower.includes('bidding')) {
+        return { label: '招标文件', color: 'var(--primary-color)', bg: 'var(--primary-lighter)' };
+      } else if (lower.includes('投标') || lower.includes('bid')) {
+        return { label: '投标文件', color: 'var(--success)', bg: 'var(--success-bg)' };
+      }
+      return Math.random() > 0.5
+        ? { label: '招标文件', color: 'var(--primary-color)', bg: 'var(--primary-lighter)' }
+        : { label: '投标文件', color: 'var(--success)', bg: 'var(--success-bg)' };
+    }
+
+    function formatFileSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    }
+
+    function updateUI() {
+      fileCount.textContent = uploadedFiles.length;
+
+      if (uploadedFiles.length === 0) {
+        fileListContainer.style.display = 'none';
+        emptyState.style.display = 'flex';
+        hasFilesState.style.display = 'none';
+        startReviewBtn.disabled = true;
+        startReviewBtn.style.opacity = '0.5';
+        startReviewBtn.style.cursor = 'not-allowed';
+        return;
+      }
+
+      fileListContainer.style.display = 'block';
+      emptyState.style.display = 'none';
+      hasFilesState.style.display = 'block';
+
+      const bidding = uploadedFiles.filter(f => f.type.label === '招标文件').length;
+      const tender = uploadedFiles.filter(f => f.type.label === '投标文件').length;
+      totalCount.textContent = uploadedFiles.length;
+      biddingCount.textContent = bidding;
+      tenderCount.textContent = tender;
+      startReviewBtn.disabled = false;
+      startReviewBtn.style.opacity = '1';
+      startReviewBtn.style.cursor = 'pointer';
+
+      fileListContent.innerHTML = uploadedFiles.map((file, index) => `
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: ${file.type.bg}; border-radius: var(--radius); margin-bottom: 6px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="${file.type.color}" stroke-width="2" width="18" height="18">
+            <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          <div style="flex: 1; min-width: 0;">
+            <div style="font-size: 13px; color: var(--gray-700); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${file.name}</div>
+            <div style="font-size: 11px; color: var(--gray-400);">${file.size}</div>
+          </div>
+          <select onchange="changeType(${index}, this.value)" style="padding: 4px 8px; border-radius: 4px; border: 1px solid ${file.type.color}; background: white; font-size: 11px; color: ${file.type.color}; cursor: pointer;">
+            <option value="招标文件" ${file.type.label === '招标文件' ? 'selected' : ''}>招标文件</option>
+            <option value="投标文件" ${file.type.label === '投标文件' ? 'selected' : ''}>投标文件</option>
+          </select>
+          <button onclick="removeFile(${index})" style="background: none; border: none; cursor: pointer; padding: 4px; color: var(--gray-400);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <path d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function changeType(index, newType) {
+      const color = newType === '招标文件' ? 'var(--primary-color)' : 'var(--success)';
+      const bg = newType === '招标文件' ? 'var(--primary-lighter)' : 'var(--success-bg)';
+      uploadedFiles[index].type = { label: newType, color: color, bg: bg };
+      updateUI();
+    }
+
+    function removeFile(index) {
+      uploadedFiles.splice(index, 1);
+      updateUI();
+    }
+
+    function startReview() {
+      if (uploadedFiles.length === 0) {
+        alert('请先上传文件');
+        return;
+      }
+      const reviewConfig = {
+        bidding: document.getElementById('configBidding').checked,
+        collusion: document.getElementById('configCollusion').checked,
+        qualification: document.getElementById('configQualification').checked,
+        response: document.getElementById('configResponse').checked,
+        files: uploadedFiles
+      };
+      sessionStorage.setItem('reviewData', JSON.stringify(reviewConfig));
+      window.location.href = '03-workspace-step2.html';
+    }
+
+    // 使用 addEventListener 绑定点击事件
+    startReviewBtn.addEventListener('click', function() {
+      if (!startReviewBtn.disabled) {
+        startReview();
+      }
+    });
+  </script>
+  <script src="sidebar.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+# ===========================================
+# 生产环境配置
+# ===========================================
+
+ENV: production
+
+# -------------------------------------------
+# 数据库配置
+# -------------------------------------------
+database:
+  host: ${POSTGRES_HOST}
+  port: 5432
+  name: bid_management
+  user: ${POSTGRES_USER}
+  password: ${POSTGRES_PASSWORD}
+  pool_size: 20
+  max_overflow: 40
+
+vector_db:
+  host: ${QDRANT_HOST}
+  port: 6333
+  collection_name: bid_documents
+  vector_size: 1536
+
+graph_db:
+  host: ${NEO4J_HOST}
+  port: 7687
+  name: neo4j
+  user: ${NEO4J_USER}
+  password: ${NEO4J_PASSWORD}
+
+redis:
+  host: ${REDIS_HOST}
+  port: 6379
+  db: 0
+  password: ${REDIS_PASSWORD}
+  memory_ttl:
+    immediate: 60
+    short_term: 7200
+    session: 172800
+
+# -------------------------------------------
+# LLM配置（后期：私有化部署）
+# -------------------------------------------
+llm:
+  active: private_qwen
+
+  ali_qwen:
+    provider: ali_qwen
+    model: qwen-max
+    api_key: ${ALI_API_KEY}
+    max_tokens: 4096
+    temperature: 0.7
+    timeout: 120
+    retry_times: 3
+    stream: true
+
+  private_qwen:
+    provider: private_qwen
+    model: qwen3-14b
+    api_base: ${PRIVATE_QWEN_URL}
+    api_key: ${PRIVATE_API_KEY}
+    max_tokens: 4096
+    temperature: 0.7
+    timeout: 180
+    retry_times: 3
+    stream: true
+
+  private_deepseek:
+    provider: private_deepseek
+    model: deepseek-v3
+    api_base: ${DEEPSEEK_URL}
+    api_key: ${PRIVATE_API_KEY}
+    max_tokens: 4096
+    temperature: 0.7
+    timeout: 180
+    retry_times: 3
+    stream: true
+
+  routing_enabled: true
+  routing_rules:
+    - condition: "task_type == 'embedding'"
+      target: ali_qwen
+      priority: 10
+    - condition: "task_type == 'complex_reasoning'"
+      target: private_qwen
+      priority: 5
+
+# -------------------------------------------
+# 存储配置
+# -------------------------------------------
+storage:
+  upload_dir: /data/bid_management/uploads
+  parsed_dir: /data/bid_management/parsed
+  report_dir: /data/bid_management/reports
+  max_file_size: 524288000
+  allowed_extensions:
+    - .pdf
+    - .docx
+    - .doc
+    - .jpg
+    - .png
+    - .zip
+
+# -------------------------------------------
+# 应用配置
+# -------------------------------------------
+app:
+  app_name: 智能招投标审查平台
+  debug: false
+  environment: production
+  api_prefix: /api/v1
+  cors_origins:
+    - https://bid.example.com
+  log_level: INFO
+  log_file: /var/log/bid_management/app.log

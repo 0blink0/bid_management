@@ -1,0 +1,111 @@
+# ===========================================
+# 开发环境配置
+# ===========================================
+
+ENV: development
+
+# -------------------------------------------
+# 数据库配置
+# -------------------------------------------
+database:
+  host: localhost
+  port: 5432
+  name: bid_management_dev
+  user: postgres
+  password: postgres123
+  pool_size: 5
+  max_overflow: 10
+
+vector_db:
+  host: localhost
+  port: 6333
+  collection_name: bid_documents_dev
+  vector_size: 1536
+
+graph_db:
+  host: localhost
+  port: 7687
+  name: neo4j
+  user: neo4j
+  password: neo4j123
+
+redis:
+  host: localhost
+  port: 6379
+  db: 0
+  password: null
+  memory_ttl:
+    immediate: 60
+    short_term: 3600
+    session: 86400
+
+# -------------------------------------------
+# LLM配置（前期：阿里云API）
+# -------------------------------------------
+llm:
+  active: ali_qwen
+
+  ali_qwen:
+    provider: ali_qwen
+    model: qwen-max
+    api_key: ${ALI_API_KEY}
+    max_tokens: 4096
+    temperature: 0.7
+    timeout: 120
+    retry_times: 3
+    stream: true
+
+  private_qwen:
+    provider: private_qwen
+    model: qwen3-14b
+    api_base: http://localhost:8000/v1
+    api_key: dummy
+    max_tokens: 4096
+    temperature: 0.7
+    timeout: 180
+    retry_times: 3
+    stream: true
+
+  private_deepseek:
+    provider: private_deepseek
+    model: deepseek-v3
+    api_base: http://localhost:8001/v1
+    api_key: dummy
+    max_tokens: 4096
+    temperature: 0.7
+    timeout: 180
+    retry_times: 3
+    stream: true
+
+  routing_enabled: false
+  routing_rules: []
+
+# -------------------------------------------
+# 存储配置
+# -------------------------------------------
+storage:
+  upload_dir: ./storage/uploads
+  parsed_dir: ./storage/parsed
+  report_dir: ./storage/reports
+  max_file_size: 524288000
+  allowed_extensions:
+    - .pdf
+    - .docx
+    - .doc
+    - .jpg
+    - .png
+    - .zip
+
+# -------------------------------------------
+# 应用配置
+# -------------------------------------------
+app:
+  app_name: 智能招投标审查平台-开发环境
+  debug: true
+  environment: development
+  api_prefix: /api/v1
+  cors_origins:
+    - http://localhost:3000
+    - http://localhost:8501
+  log_level: DEBUG
+  log_file: ./logs/dev.log

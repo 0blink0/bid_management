@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智能招投标审查平台 - 登录</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-logo">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+            <defs>
+              <linearGradient id="shieldMain" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1E5AA8"/>
+                <stop offset="50%" stop-color="#2C7BE5"/>
+                <stop offset="100%" stop-color="#1E5AA8"/>
+              </linearGradient>
+              <linearGradient id="goldBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFD700"/>
+                <stop offset="100%" stop-color="#B8860B"/>
+              </linearGradient>
+              <filter id="shieldShadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#1E5AA8" flood-opacity="0.3"/>
+              </filter>
+              <filter id="badgeShadow" x="-50%" y="-50%" width="200%" height="200%">
+                <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.25"/>
+              </filter>
+            </defs>
+            <!-- 盾牌主体 -->
+            <g filter="url(#shieldShadow)">
+              <path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="url(#shieldMain)"/>
+            </g>
+            <!-- 盾牌顶部高光 -->
+            <path d="M22 2L4 9v10c0 10 8 17 18 17" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+            <!-- 盾牌底部暗部 -->
+            <path d="M22 36c8.5 0 15-5.5 16-13" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.5"/>
+            <!-- 盾牌边缘轮廓 -->
+            <path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <!-- 文档图标 -->
+            <g transform="translate(14, 11)">
+              <path d="M12 0H4a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6l-4-6z" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 0v6h4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 10h6M5 13h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </g>
+            <!-- 金色徽章 -->
+            <g filter="url(#badgeShadow)" transform="translate(28, 26)">
+              <circle cx="8" cy="8" r="7" fill="url(#goldBadge)" stroke="#B8860B" stroke-width="0.5"/>
+              <circle cx="8" cy="8" r="5.5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+              <path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </div>
+        <h1 class="login-title">智能招投标审查平台</h1>
+        <p class="login-subtitle">AI 驱动的招投标文档智能审查系统</p>
+      </div>
+
+      <form class="login-form" action="02-workspace.html">
+        <div class="form-group">
+          <label class="form-label">用户名</label>
+          <input type="text" class="form-input" placeholder="请输入用户名" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">密码</label>
+          <input type="password" class="form-input" placeholder="请输入密码" required>
+        </div>
+
+        <button type="submit" class="btn-login">登 录</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

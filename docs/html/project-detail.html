@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>项目详情 - 智能招投标审查平台</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-layout">
+    <!-- 顶部导航栏 -->
+    <header class="topbar">
+      <div class="topbar-logo">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+          <defs>
+            <linearGradient id="shieldMain" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1E5AA8"/>
+              <stop offset="50%" stop-color="#2C7BE5"/>
+              <stop offset="100%" stop-color="#1E5AA8"/>
+            </linearGradient>
+            <linearGradient id="goldBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFD700"/>
+              <stop offset="100%" stop-color="#B8860B"/>
+            </linearGradient>
+            <filter id="shieldShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#1E5AA8" flood-opacity="0.3"/>
+            </filter>
+            <filter id="badgeShadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.25"/>
+            </filter>
+          </defs>
+          <g filter="url(#shieldShadow)">
+            <path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="url(#shieldMain)"/>
+          </g>
+          <path d="M22 2L4 9v10c0 10 8 17 18 17" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+          <path d="M22 36c8.5 0 15-5.5 16-13" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.5"/>
+          <path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <g transform="translate(14, 11)">
+            <path d="M12 0H4a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6l-4-6z" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 0v6h4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 10h6M5 13h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <g filter="url(#badgeShadow)" transform="translate(28, 26)">
+            <circle cx="8" cy="8" r="7" fill="url(#goldBadge)" stroke="#B8860B" stroke-width="0.5"/>
+            <circle cx="8" cy="8" r="5.5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+            <path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>
+        <span class="topbar-title">智能招投标审查平台</span>
+      </div>
+      <div class="topbar-actions">
+        <div class="topbar-user-dropdown">
+          <div class="topbar-user">
+            <div class="topbar-user-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <span class="topbar-user-name">张三</span>
+            <svg class="topbar-user-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+          <div class="topbar-user-menu">
+            <a href="#" class="topbar-user-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+              </svg>
+              修改用户信息
+            </a>
+            <div class="topbar-user-menu-divider"></div>
+            <a href="#" class="topbar-user-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+              </svg>
+              退出
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="main-wrapper">
+      <div class="main-content">
+        <div style="max-width: 1200px;">
+          <!-- 页面标题 -->
+          <div class="page-header" style="margin-bottom: 24px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <a href="project-list.html" style="color: var(--gray-500);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                  <path d="M15 19l-7-7 7-7"/>
+                </svg>
+              </a>
+              <div>
+                <h1 class="page-title">某市政府云平台建设项目</h1>
+                <p class="text-muted mt-8">识别时间：2026-03-27 10:30 | 状态：<span class="status-badge success">已完成</span></p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 12px;">
+              <a href="06b-report-detail.html" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-right: 4px;">
+                  <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                查看报告
+              </a>
+            </div>
+          </div>
+
+          <!-- 项目信息卡片 -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
+            <div class="stat-card">
+              <div class="stat-icon blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                  <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div class="stat-value">1</div>
+              <div class="stat-label">招标文件</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                  <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+              </div>
+              <div class="stat-value">3</div>
+              <div class="stat-label">投标单位</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon orange">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                  <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+              </div>
+              <div class="stat-value">12</div>
+              <div class="stat-label">发现问题</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                  <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div class="stat-value">1</div>
+              <div class="stat-label">风险预警</div>
+            </div>
+          </div>
+
+          <!-- 项目信息 -->
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+              <h3 class="card-title">项目信息</h3>
+            </div>
+            <div style="padding: 20px;">
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <div>
+                  <div style="font-size: 13px; color: var(--gray-500); margin-bottom: 4px;">项目名称</div>
+                  <div style="font-size: 15px; font-weight: 500; color: var(--gray-800);">某市政府云平台建设项目</div>
+                </div>
+                <div>
+                  <div style="font-size: 13px; color: var(--gray-500); margin-bottom: 4px;">招标单位</div>
+                  <div style="font-size: 15px; font-weight: 500; color: var(--gray-800);">某市人民政府</div>
+                </div>
+                <div>
+                  <div style="font-size: 13px; color: var(--gray-500); margin-bottom: 4px;">预算金额</div>
+                  <div style="font-size: 15px; font-weight: 500; color: var(--gray-800);">¥ 2,800 万元</div>
+                </div>
+                <div>
+                  <div style="font-size: 13px; color: var(--gray-500); margin-bottom: 4px;">招标方式</div>
+                  <div style="font-size: 15px; font-weight: 500; color: var(--gray-800);">公开招标</div>
+                </div>
+                <div>
+                  <div style="font-size: 13px; color: var(--gray-500); margin-bottom: 4px;">开标时间</div>
+                  <div style="font-size: 15px; font-weight: 500; color: var(--gray-800);">2026-04-15 09:00</div>
+                </div>
+                <div>
+                  <div style="font-size: 13px; color: var(--gray-500); margin-bottom: 4px;">工期要求</div>
+                  <div style="font-size: 15px; font-weight: 500; color: var(--gray-800);">180日历天</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 招标文件 -->
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+              <h3 class="card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2" width="18" height="18">
+                  <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                招标文件
+              </h3>
+              <span style="font-size: 13px; color: var(--gray-500);">1份</span>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>文件名称</th>
+                  <th>文件类型</th>
+                  <th>上传时间</th>
+                  <th>状态</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight: 500;">招标文件_云平台建设.pdf</td>
+                  <td><span class="file-type-badge bidding">招标文件</span></td>
+                  <td>2026-03-27 10:30</td>
+                  <td><span class="status-badge success">已解析</span></td>
+                  <td>
+                    <a href="07-pdf-preview.html" class="btn-link">预览</a>
+                    <a href="qualification-check.html" class="btn-link">检测</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 投标方列表 -->
+          <div class="card" style="padding: 0; overflow: hidden;">
+            <div class="card-header">
+              <h3 class="card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2" width="18" height="18">
+                  <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+                投标单位列表
+              </h3>
+              <span style="font-size: 13px; color: var(--gray-500);">共 3 家投标单位</span>
+            </div>
+
+            <!-- 投标方1 -->
+            <div style="border-bottom: 1px solid var(--gray-200);">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--gray-50);">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 16px;">华</div>
+                  <div>
+                    <div style="font-weight: 600; color: var(--gray-800);">华夏科技股份有限公司</div>
+                    <div style="font-size: 12px; color: var(--gray-500);">提交时间：2026-03-27 14:30</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 16px;">
+                  <div style="text-align: center;">
+                    <div style="font-size: 14px; font-weight: 600; color: var(--warning);">⚠</div>
+                    <div style="font-size: 11px; color: var(--gray-500);">资质预警</div>
+                  </div>
+                  <div style="text-align: center;">
+                    <div style="font-size: 14px; font-weight: 600; color: var(--warning);">85</div>
+                    <div style="font-size: 11px; color: var(--gray-500);">响应得分</div>
+                  </div>
+                  <a href="06b-report-detail.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">查看详情</a>
+                </div>
+              </div>
+              <div style="padding: 16px 20px;">
+                <div style="font-size: 13px; color: var(--gray-500); margin-bottom: 8px;">投标文件</div>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--gray-50); border-radius: var(--radius);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--gray-400)" stroke-width="2" width="20" height="20">
+                    <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+                  <span style="font-size: 14px; color: var(--gray-700);">投标文件_华夏科技.pdf</span>
+                  <span class="status-badge success" style="margin-left: auto;">已解析</span>
+                  <a href="07-pdf-preview.html" class="btn-link">预览</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 投标方2 -->
+            <div style="border-bottom: 1px solid var(--gray-200);">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--gray-50);">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #22c55e, #16a34a); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 16px;">中</div>
+                  <div>
+                    <div style="font-weight: 600; color: var(--gray-800);">中科软信息技术有限公司</div>
+                    <div style="font-size: 12px; color: var(--gray-500);">提交时间：2026-03-27 15:20</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 16px;">
+                  <div style="text-align: center;">
+                    <div style="font-size: 14px; font-weight: 600; color: var(--success);">✓</div>
+                    <div style="font-size: 11px; color: var(--gray-500);">资质通过</div>
+                  </div>
+                  <div style="text-align: center;">
+                    <div style="font-size: 14px; font-weight: 600; color: var(--success);">92</div>
+                    <div style="font-size: 11px; color: var(--gray-500);">响应得分</div>
+                  </div>
+                  <a href="06b-report-detail.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">查看详情</a>
+                </div>
+              </div>
+              <div style="padding: 16px 20px;">
+                <div style="font-size: 13px; color: var(--gray-500); margin-bottom: 8px;">投标文件</div>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--gray-50); border-radius: var(--radius);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--gray-400)" stroke-width="2" width="20" height="20">
+                    <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+                  <span style="font-size: 14px; color: var(--gray-700);">投标文件_中科软.pdf</span>
+                  <span class="status-badge success" style="margin-left: auto;">已解析</span>
+                  <a href="07-pdf-preview.html" class="btn-link">预览</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 投标方3 -->
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--gray-50);">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #8B5CF6, #7c3aed); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 16px;">云</div>
+                  <div>
+                    <div style="font-weight: 600; color: var(--gray-800);">云智科技有限公司</div>
+                    <div style="font-size: 12px; color: var(--gray-500);">提交时间：2026-03-27 16:45</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 16px;">
+                  <div style="text-align: center;">
+                    <div style="font-size: 14px; font-weight: 600; color: var(--success);">✓</div>
+                    <div style="font-size: 11px; color: var(--gray-500);">资质通过</div>
+                  </div>
+                  <div style="text-align: center;">
+                    <div style="font-size: 14px; font-weight: 600; color: var(--warning);">78</div>
+                    <div style="font-size: 11px; color: var(--gray-500);">响应得分</div>
+                  </div>
+                  <a href="06b-report-detail.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">查看详情</a>
+                </div>
+              </div>
+              <div style="padding: 16px 20px;">
+                <div style="font-size: 13px; color: var(--gray-500); margin-bottom: 8px;">投标文件</div>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--gray-50); border-radius: var(--radius);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--gray-400)" stroke-width="2" width="20" height="20">
+                    <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+                  <span style="font-size: 14px; color: var(--gray-700);">投标文件_云智科技.pdf</span>
+                  <span class="status-badge success" style="margin-left: auto;">已解析</span>
+                  <a href="07-pdf-preview.html" class="btn-link">预览</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <style>
+    .file-type-badge {
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .file-type-badge.bidding {
+      background: rgba(30, 90, 168, 0.1);
+      color: var(--primary-color);
+    }
+  </style>
+  <script src="sidebar.js"></script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户管理 - 智能招投标审查平台</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-layout">
+    <!-- 顶部导航栏 -->
+    <header class="topbar">
+      <div class="topbar-logo">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+          <defs>
+            <linearGradient id="shieldMain" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1E5AA8"/>
+              <stop offset="50%" stop-color="#2C7BE5"/>
+              <stop offset="100%" stop-color="#1E5AA8"/>
+            </linearGradient>
+            <linearGradient id="goldBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFD700"/>
+              <stop offset="100%" stop-color="#B8860B"/>
+            </linearGradient>
+            <filter id="shieldShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#1E5AA8" flood-opacity="0.3"/>
+            </filter>
+            <filter id="badgeShadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.25"/>
+            </filter>
+          </defs>
+          <g filter="url(#shieldShadow)">
+            <path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="url(#shieldMain)"/>
+          </g>
+          <path d="M22 2L4 9v10c0 10 8 17 18 17" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+          <path d="M22 36c8.5 0 15-5.5 16-13" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.5"/>
+          <path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <g transform="translate(14, 11)">
+            <path d="M12 0H4a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6l-4-6z" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 0v6h4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 10h6M5 13h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <g filter="url(#badgeShadow)" transform="translate(28, 26)">
+            <circle cx="8" cy="8" r="7" fill="url(#goldBadge)" stroke="#B8860B" stroke-width="0.5"/>
+            <circle cx="8" cy="8" r="5.5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+            <path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>
+        <span class="topbar-title">智能招投标审查平台</span>
+      </div>
+      <div class="topbar-actions">
+        <div class="topbar-user-dropdown">
+          <div class="topbar-user">
+            <div class="topbar-user-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <span class="topbar-user-name">张三</span>
+            <svg class="topbar-user-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+          <div class="topbar-user-menu">
+            <a href="#" class="topbar-user-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+              </svg>
+              修改用户信息
+            </a>
+            <div class="topbar-user-menu-divider"></div>
+            <a href="#" class="topbar-user-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+              </svg>
+              退出
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="main-wrapper">
+      <div class="main-content">
+        <div style="max-width: 1200px;">
+
+          <!-- 页面标题 -->
+          <div class="page-header" style="margin-bottom: 24px;">
+            <div>
+              <h1 class="page-title">用户管理</h1>
+              <p class="text-muted mt-8">管理系统用户账户和权限配置</p>
+            </div>
+            <button class="btn btn-primary" onclick="showAddUserModal()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="margin-right: 6px;">
+                <path d="M12 4v16m8-8H4"/>
+              </svg>
+              添加用户
+            </button>
+          </div>
+
+          <!-- 筛选栏 -->
+          <div class="card" style="padding: 16px 20px; margin-bottom: 16px;">
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <div style="position: relative; flex: 1; max-width: 300px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--gray-400)" stroke-width="2" width="18" height="18" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%);">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="M21 21l-4.35-4.35"/>
+                </svg>
+                <input type="text" placeholder="搜索用户名、姓名..." class="input" style="padding-left: 40px; height: 40px;">
+              </div>
+              <select class="select" style="width: 140px; height: 40px;">
+                <option value="">全部角色</option>
+                <option value="admin">管理员</option>
+                <option value="reviewer">审核员</option>
+                <option value="viewer">查看者</option>
+              </select>
+              <select class="select" style="width: 140px; height: 40px;">
+                <option value="">全部状态</option>
+                <option value="active">启用</option>
+                <option value="disabled">禁用</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 用户列表 -->
+          <div class="card" style="padding: 0; overflow: hidden;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>用户</th>
+                  <th>角色</th>
+                  <th>部门</th>
+                  <th>状态</th>
+                  <th>最近登录</th>
+                  <th>创建时间</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 14px;">张</div>
+                      <div>
+                        <div style="font-weight: 500; color: var(--gray-800);">zhangsan</div>
+                        <div style="font-size: 12px; color: var(--gray-500);">张三</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="role-badge admin">管理员</span>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">技术部</div>
+                  </td>
+                  <td>
+                    <span class="status-badge success">启用</span>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">2026-03-31</div>
+                    <div style="font-size: 12px; color: var(--gray-400);">10:30</div>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">2025-01-15</div>
+                  </td>
+                  <td>
+                    <div style="display: flex; gap: 8px;">
+                      <button class="btn-icon" title="编辑" onclick="showEditUserModal('zhangsan')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                          <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                        </svg>
+                      </button>
+                      <button class="btn-icon danger" title="删除">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                          <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #22c55e, #16a34a); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 14px;">李</div>
+                      <div>
+                        <div style="font-weight: 500; color: var(--gray-800);">lisi</div>
+                        <div style="font-size: 12px; color: var(--gray-500);">李四</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="role-badge reviewer">审核员</span>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">业务部</div>
+                  </td>
+                  <td>
+                    <span class="status-badge success">启用</span>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">2026-03-30</div>
+                    <div style="font-size: 12px; color: var(--gray-400);">14:20</div>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">2025-02-20</div>
+                  </td>
+                  <td>
+                    <div style="display: flex; gap: 8px;">
+                      <button class="btn-icon" title="编辑" onclick="showEditUserModal('lisi')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                          <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                        </svg>
+                      </button>
+                      <button class="btn-icon danger" title="删除">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                          <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #d97706); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 14px;">王</div>
+                      <div>
+                        <div style="font-weight: 500; color: var(--gray-800);">wangwu</div>
+                        <div style="font-size: 12px; color: var(--gray-500);">王五</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="role-badge viewer">查看者</span>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">财务部</div>
+                  </td>
+                  <td>
+                    <span class="status-badge success">启用</span>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">2026-03-29</div>
+                    <div style="font-size: 12px; color: var(--gray-400);">09:15</div>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">2025-03-10</div>
+                  </td>
+                  <td>
+                    <div style="display: flex; gap: 8px;">
+                      <button class="btn-icon" title="编辑" onclick="showEditUserModal('wangwu')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                          <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                        </svg>
+                      </button>
+                      <button class="btn-icon danger" title="删除">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                          <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #ef4444, #dc2626); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 14px;">赵</div>
+                      <div>
+                        <div style="font-weight: 500; color: var(--gray-800);">zhaoliu</div>
+                        <div style="font-size: 12px; color: var(--gray-500);">赵六</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="role-badge reviewer">审核员</span>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">技术部</div>
+                  </td>
+                  <td>
+                    <span class="status-badge warning">禁用</span>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">2026-03-15</div>
+                    <div style="font-size: 12px; color: var(--gray-400);">16:45</div>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">2025-04-01</div>
+                  </td>
+                  <td>
+                    <div style="display: flex; gap: 8px;">
+                      <button class="btn-icon" title="编辑" onclick="showEditUserModal('zhaoliu')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                          <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                        </svg>
+                      </button>
+                      <button class="btn-icon danger" title="删除">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                          <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- 分页 -->
+            <div class="pagination-wrapper">
+              <div class="pagination-info">共 12 个用户，第 1/2 页</div>
+              <div class="pagination-controls">
+                <button class="pagination-btn icon-only" disabled>首页</button>
+                <button class="pagination-btn icon-only" disabled>上一页</button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn icon-only">下一页</button>
+                <button class="pagination-btn icon-only">末页</button>
+              </div>
+              <div class="pagination-jump">
+                <span class="pagination-jump-label">跳转到</span>
+                <input type="number" class="pagination-jump-input" min="1" value="1">
+                <button class="pagination-jump-btn">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <style>
+    .role-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .role-badge.admin {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+    .role-badge.reviewer {
+      background: rgba(139, 92, 246, 0.1);
+      color: #8b5cf6;
+    }
+    .role-badge.viewer {
+      background: rgba(34, 197, 94, 0.1);
+      color: #22c55e;
+    }
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: none;
+      background: var(--gray-100);
+      color: var(--gray-600);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .btn-icon:hover {
+      background: var(--gray-200);
+      color: var(--gray-800);
+    }
+    .btn-icon.danger:hover {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+  </style>
+
+  <script src="sidebar.js"></script>
+  <script>
+    function showAddUserModal() {
+      alert('添加用户功能 - 待实现');
+    }
+    function showEditUserModal(username) {
+      alert('编辑用户: ' + username + ' - 待实现');
+    }
+  </script>
+</body>
+</html>

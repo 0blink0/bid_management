@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>围串标检测详情 - 智能招投标审查平台</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .bidder-card {
+      display: block;
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.2s;
+      background: white;
+    }
+    .bidder-card:hover {
+      border-color: var(--primary-light);
+    }
+    .bidder-card.selected {
+      border-color: var(--primary-color);
+      background: rgba(30, 90, 168, 0.02);
+    }
+    .bidder-card-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+    }
+    .bidder-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .bidder-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .bidder-name {
+      font-weight: 500;
+      color: var(--gray-800);
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .bidder-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .bidder-check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--gray-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .bidder-card.selected .bidder-check {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+      color: white;
+    }
+    .suspicious-card {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .suspicious-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(239, 68, 68, 0.05);
+      cursor: pointer;
+    }
+    .suspicious-card-header:hover {
+      background: rgba(239, 68, 68, 0.08);
+    }
+    .suspicious-card-content {
+      padding: 16px;
+      display: none;
+    }
+    .suspicious-card.expanded .suspicious-card-content {
+      display: block;
+    }
+    .expand-icon {
+      transition: transform 0.2s;
+    }
+    .suspicious-card.expanded .expand-icon {
+      transform: rotate(180deg);
+    }
+    .risk-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .risk-tag.danger {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--danger);
+    }
+    .risk-tag.warning {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--warning);
+    }
+    .heatmap-cell {
+      padding: 8px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 4px;
+    }
+    .heatmap-cell.high {
+      background: rgba(239, 68, 68, 0.2);
+      color: var(--danger);
+    }
+    .heatmap-cell.medium {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--warning);
+    }
+    .heatmap-cell.low {
+      background: rgba(34, 197, 94, 0.2);
+      color: var(--success);
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <!-- 顶部导航栏 -->
+    <header class="topbar">
+      <div class="topbar-logo">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+          <defs>
+            <linearGradient id="shieldMain" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1E5AA8"/>
+              <stop offset="50%" stop-color="#2C7BE5"/>
+              <stop offset="100%" stop-color="#1E5AA8"/>
+            </linearGradient>
+            <linearGradient id="goldBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFD700"/>
+              <stop offset="100%" stop-color="#B8860B"/>
+            </linearGradient>
+          </defs>
+          <g filter="url(#shieldShadow)"><path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="url(#shieldMain)"/></g>
+          <g transform="translate(14, 11)"><path d="M12 0H4a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6l-4-6z" fill="none" stroke="white" stroke-width="1.8"/></g>
+          <g filter="url(#badgeShadow)" transform="translate(28, 26)"><circle cx="8" cy="8" r="7" fill="url(#goldBadge)"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.8"/></g>
+        </svg>
+        <span class="topbar-title">智能招投标审查平台</span>
+      </div>
+      <div class="topbar-actions"><div class="topbar-user-dropdown"><div class="topbar-user"><div class="topbar-user-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="topbar-user-name">张三</span></div></div></div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="main-wrapper">
+      <div class="main-content">
+        <div style="max-width: 1400px;">
+          <!-- 页面标题和操作按钮 -->
+          <div class="page-header" style="margin-bottom: 24px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <a href="detection-list.html" style="color: var(--gray-500);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                  <path d="M15 19l-7-7 7-7"/>
+                </svg>
+              </a>
+              <div>
+                <h1 class="page-title">某市政府云平台建设项目</h1>
+                <p class="text-muted mt-8">选择投标单位进行围串标检测分析</p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 12px;">
+              <button class="btn btn-secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                  <path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                导出报告
+              </button>
+              <button class="btn btn-primary" id="detectBtn" onclick="startDetect()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                  <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+                开始检测
+                <span id="detectCount" style="margin-left: 4px;">(0)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 概览统计 -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
+            <div class="stat-card">
+              <div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div>
+              <div class="stat-value">3</div>
+              <div class="stat-label">投标单位</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg></div>
+              <div class="stat-value">3</div>
+              <div class="stat-label">检测组合</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
+              <div class="stat-value">2</div>
+              <div class="stat-label">可疑组合</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div>
+              <div class="stat-value">高风险</div>
+              <div class="stat-label">整体风险</div>
+            </div>
+          </div>
+
+          <!-- 投标方选择列表 -->
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="card-header">
+              <h3 class="card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2" width="18" height="18">
+                  <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+                选择投标单位
+              </h3>
+              <div style="display: flex; gap: 12px; align-items: center;">
+                <span style="font-size: 13px; color: var(--gray-500);">已选择 <span id="selectedCount">3</span> 家（需≥2家）</span>
+                <button class="btn-link" onclick="selectAll()" style="font-size: 13px;">全选</button>
+                <button class="btn-link" onclick="clearSelection()" style="font-size: 13px;">清空</button>
+              </div>
+            </div>
+            <div style="padding: 16px;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;">
+                <!-- 投标方1 -->
+                <label class="bidder-card selected" onclick="toggleBidder(this, 'huawei')">
+                  <input type="checkbox" checked style="display: none;">
+                  <div class="bidder-card-content">
+                    <div class="bidder-avatar" style="background: linear-gradient(135deg, var(--primary-color), var(--primary-light));">华</div>
+                    <div class="bidder-info">
+                      <div class="bidder-name">华夏科技股份有限公司</div>
+                      <div class="bidder-meta">
+                        <span class="status-badge success">无风险</span>
+                      </div>
+                    </div>
+                    <div class="bidder-check">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <path d="M5 13l4 4L19 7"/>
+                      </svg>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- 投标方2 -->
+                <label class="bidder-card selected" onclick="toggleBidder(this, 'zhongke')">
+                  <input type="checkbox" checked style="display: none;">
+                  <div class="bidder-card-content">
+                    <div class="bidder-avatar" style="background: linear-gradient(135deg, #22c55e, #16a34a);">中</div>
+                    <div class="bidder-info">
+                      <div class="bidder-name">中科软信息技术有限公司</div>
+                      <div class="bidder-meta">
+                        <span class="status-badge danger">⚠ 高风险</span>
+                      </div>
+                    </div>
+                    <div class="bidder-check">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <path d="M5 13l4 4L19 7"/>
+                      </svg>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- 投标方3 -->
+                <label class="bidder-card selected" onclick="toggleBidder(this, 'yunzhi')">
+                  <input type="checkbox" checked style="display: none;">
+                  <div class="bidder-card-content">
+                    <div class="bidder-avatar" style="background: linear-gradient(135deg, #8B5CF6, #7c3aed);">云</div>
+                    <div class="bidder-info">
+                      <div class="bidder-name">云智科技有限公司</div>
+                      <div class="bidder-meta">
+                        <span class="status-badge danger">⚠ 高风险</span>
+                      </div>
+                    </div>
+                    <div class="bidder-check">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <path d="M5 13l4 4L19 7"/>
+                      </svg>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- 投标方4 -->
+                <label class="bidder-card" onclick="toggleBidder(this, 'tianyu')">
+                  <input type="checkbox" style="display: none;">
+                  <div class="bidder-card-content">
+                    <div class="bidder-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706);">天</div>
+                    <div class="bidder-info">
+                      <div class="bidder-name">天宇信息技术有限公司</div>
+                      <div class="bidder-meta">
+                        <span class="status-badge warning">⚠ 中风险</span>
+                      </div>
+                    </div>
+                    <div class="bidder-check">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <path d="M5 13l4 4L19 7"/>
+                      </svg>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- 投标方5 -->
+                <label class="bidder-card" onclick="toggleBidder(this, 'jingong')">
+                  <input type="checkbox" style="display: none;">
+                  <div class="bidder-card-content">
+                    <div class="bidder-avatar" style="background: linear-gradient(135deg, #ef4444, #dc2626);">金</div>
+                    <div class="bidder-info">
+                      <div class="bidder-name">金拱门系统集成有限公司</div>
+                      <div class="bidder-meta">
+                        <span class="status-badge success">无风险</span>
+                      </div>
+                    </div>
+                    <div class="bidder-check">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <path d="M5 13l4 4L19 7"/>
+                      </svg>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 检测结果（初始隐藏，点击开始检测后显示） -->
+          <div id="detectResult" style="display: none;">
+            <!-- 关联度热力图 -->
+            <div class="card" style="margin-bottom: 16px; padding: 0; overflow: hidden;">
+              <div class="card-header">
+                <h3 class="card-title">投标方关联度矩阵</h3>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <span class="heatmap-cell low" style="font-size: 11px; padding: 4px 8px;">低风险</span>
+                  <span class="heatmap-cell medium" style="font-size: 11px; padding: 4px 8px;">中风险</span>
+                  <span class="heatmap-cell high" style="font-size: 11px; padding: 4px 8px;">高风险</span>
+                </div>
+              </div>
+              <div style="padding: 16px; overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; min-width: 500px;">
+                  <thead>
+                    <tr>
+                      <th style="text-align: left; padding: 8px; color: var(--gray-500); font-size: 12px;"></th>
+                      <th style="text-align: center; padding: 8px; color: var(--gray-700); font-size: 13px; font-weight: 500;">华夏科技</th>
+                      <th style="text-align: center; padding: 8px; color: var(--gray-700); font-size: 13px; font-weight: 500;">中科软</th>
+                      <th style="text-align: center; padding: 8px; color: var(--gray-700); font-size: 13px; font-weight: 500;">云智科技</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align: left; padding: 8px; color: var(--gray-700); font-size: 13px; font-weight: 500;">华夏科技</td>
+                      <td style="text-align: center; padding: 8px;">
+                        <span style="color: var(--gray-400); font-size: 13px;">-</span>
+                      </td>
+                      <td style="text-align: center; padding: 8px;">
+                        <span class="heatmap-cell high">92%</span>
+                      </td>
+                      <td style="text-align: center; padding: 8px;">
+                        <span class="heatmap-cell high">87%</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: left; padding: 8px; color: var(--gray-700); font-size: 13px; font-weight: 500;">中科软</td>
+                      <td style="text-align: center; padding: 8px;">
+                        <span class="heatmap-cell high">92%</span>
+                      </td>
+                      <td style="text-align: center; padding: 8px;">
+                        <span style="color: var(--gray-400); font-size: 13px;">-</span>
+                      </td>
+                      <td style="text-align: center; padding: 8px;">
+                        <span class="heatmap-cell warning">78%</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: left; padding: 8px; color: var(--gray-700); font-size: 13px; font-weight: 500;">云智科技</td>
+                      <td style="text-align: center; padding: 8px;">
+                        <span class="heatmap-cell high">87%</span>
+                      </td>
+                      <td style="text-align: center; padding: 8px;">
+                        <span class="heatmap-cell warning">78%</span>
+                      </td>
+                      <td style="text-align: center; padding: 8px;">
+                        <span style="color: var(--gray-400); font-size: 13px;">-</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- 可疑组合详情 -->
+            <div class="card" style="padding: 0; overflow: hidden;">
+              <div class="card-header">
+                <h3 class="card-title">可疑组合详情</h3>
+                <span style="font-size: 13px; color: var(--gray-500);">检测到 2 对可疑组合</span>
+              </div>
+              <div style="padding: 16px;">
+                <!-- 可疑组合1 -->
+                <div class="suspicious-card expanded">
+                  <div class="suspicious-card-header" onclick="toggleCard(this.parentElement)">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 600;">华</div>
+                        <span style="font-weight: 600; color: var(--gray-800);">华夏科技</span>
+                      </div>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="color: var(--gray-400);">
+                        <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                      </svg>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #22c55e, #16a34a); display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 600;">中</div>
+                        <span style="font-weight: 600; color: var(--gray-800);">中科软</span>
+                      </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <span class="risk-tag danger">关联度 92%</span>
+                      <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <path d="M6 9l6 6 6-6"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="suspicious-card-content">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                      <div style="padding: 12px; background: rgba(239, 68, 68, 0.05); border-radius: var(--radius); border: 1px solid rgba(239, 68, 68, 0.2);">
+                        <div style="font-size: 12px; color: var(--danger); font-weight: 500; margin-bottom: 6px;">👥 人员重叠</div>
+                        <div style="font-size: 13px; color: var(--gray-700);">3人疑似同一项目团队</div>
+                        <div style="font-size: 11px; color: var(--gray-500); margin-top: 4px;">项目经理张工、技术负责人李工、造价工程师王工</div>
+                      </div>
+                      <div style="padding: 12px; background: rgba(245, 158, 11, 0.05); border-radius: var(--radius); border: 1px solid rgba(245, 158, 11, 0.2);">
+                        <div style="font-size: 12px; color: var(--warning); font-weight: 500; margin-bottom: 6px;">📞 联系方式重叠</div>
+                        <div style="font-size: 13px; color: var(--gray-700);">2处相同联系方式</div>
+                        <div style="font-size: 11px; color: var(--gray-500); margin-top: 4px;">联系电话、办公地址存在重叠</div>
+                      </div>
+                      <div style="padding: 12px; background: rgba(139, 92, 246, 0.05); border-radius: var(--radius); border: 1px solid rgba(139, 92, 246, 0.2);">
+                        <div style="font-size: 12px; color: #7C3AED; font-weight: 500; margin-bottom: 6px;">📄 文件相似度</div>
+                        <div style="font-size: 13px; color: var(--gray-700);">技术方案相似度 85%</div>
+                        <div style="font-size: 11px; color: var(--gray-500); margin-top: 4px;">存在大量相似段落</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 可疑组合2 -->
+                <div class="suspicious-card">
+                  <div class="suspicious-card-header" onclick="toggleCard(this.parentElement)">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 600;">华</div>
+                        <span style="font-weight: 600; color: var(--gray-800);">华夏科技</span>
+                      </div>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="color: var(--gray-400);">
+                        <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                      </svg>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #8B5CF6, #7c3aed); display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 600;">云</div>
+                        <span style="font-weight: 600; color: var(--gray-800);">云智科技</span>
+                      </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <span class="risk-tag danger">关联度 87%</span>
+                      <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <path d="M6 9l6 6 6-6"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="suspicious-card-content">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                      <div style="padding: 12px; background: rgba(139, 92, 246, 0.05); border-radius: var(--radius); border: 1px solid rgba(139, 92, 246, 0.2);">
+                        <div style="font-size: 12px; color: #7C3AED; font-weight: 500; margin-bottom: 6px;">📄 文件相似度</div>
+                        <div style="font-size: 13px; color: var(--gray-700);">技术方案相似度 79%</div>
+                        <div style="font-size: 11px; color: var(--gray-500); margin-top: 4px;">多处可疑相似段落</div>
+                      </div>
+                      <div style="padding: 12px; background: rgba(245, 158, 11, 0.05); border-radius: var(--radius); border: 1px solid rgba(245, 158, 11, 0.2);">
+                        <div style="font-size: 12px; color: var(--warning); font-weight: 500; margin-bottom: 6px;">🏢 资质重叠</div>
+                        <div style="font-size: 13px; color: var(--gray-700);">1项相同资质证书</div>
+                        <div style="font-size: 11px; color: var(--gray-500); margin-top: 4px;">ISO9001认证证书编号相同</div>
+                      </div>
+                      <div style="padding: 12px; background: rgba(34, 197, 94, 0.05); border-radius: var(--radius); border: 1px solid rgba(34, 197, 94, 0.2);">
+                        <div style="font-size: 12px; color: var(--success); font-weight: 500; margin-bottom: 6px;">👥 人员重叠</div>
+                        <div style="font-size: 13px; color: var(--gray-700);">1人疑似关联</div>
+                        <div style="font-size: 11px; color: var(--gray-500); margin-top: 4px;">技术负责人存在轻微关联</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="sidebar.js"></script>
+  <script>
+    let selectedBidders = ['huawei', 'zhongke', 'yunzhi'];
+
+    function toggleBidder(element, bidderId) {
+      const index = selectedBidders.indexOf(bidderId);
+      if (index > -1) {
+        selectedBidders.splice(index, 1);
+        element.classList.remove('selected');
+      } else {
+        selectedBidders.push(bidderId);
+        element.classList.add('selected');
+      }
+      updateDetectButton();
+    }
+
+    function selectAll() {
+      document.querySelectorAll('.bidder-card').forEach(card => {
+        card.classList.add('selected');
+      });
+      selectedBidders = ['huawei', 'zhongke', 'yunzhi', 'tianyu', 'jingong'];
+      updateDetectButton();
+    }
+
+    function clearSelection() {
+      document.querySelectorAll('.bidder-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+      selectedBidders = [];
+      updateDetectButton();
+    }
+
+    function updateDetectButton() {
+      document.getElementById('selectedCount').textContent = selectedBidders.length;
+      document.getElementById('detectCount').textContent = '(' + selectedBidders.length + ')';
+      document.getElementById('detectBtn').disabled = selectedBidders.length < 2;
+    }
+
+    function startDetect() {
+      document.getElementById('detectResult').style.display = 'block';
+      document.getElementById('detectResult').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function toggleCard(card) {
+      card.classList.toggle('expanded');
+    }
+
+    // 初始化
+    updateDetectButton();
+  </script>
+</body>
+</html>

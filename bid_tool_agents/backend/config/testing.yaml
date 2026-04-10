@@ -1,0 +1,88 @@
+# ===========================================
+# 测试环境配置
+# ===========================================
+
+ENV: testing
+
+# -------------------------------------------
+# 数据库配置
+# -------------------------------------------
+database:
+  host: localhost
+  port: 5432
+  name: bid_management_test
+  user: postgres
+  password: postgres
+  pool_size: 5
+  max_overflow: 10
+
+vector_db:
+  host: localhost
+  port: 6333
+  collection_name: bid_documents_test
+  vector_size: 1536
+
+graph_db:
+  host: localhost
+  port: 7687
+  name: neo4j_test
+  user: neo4j
+  password: neo4j
+
+redis:
+  host: localhost
+  port: 6379
+  db: 1
+  password: null
+  memory_ttl:
+    immediate: 30
+    short_term: 1800
+    session: 3600
+
+# -------------------------------------------
+# LLM配置（测试用低配置）
+# -------------------------------------------
+llm:
+  active: ali_qwen
+
+  ali_qwen:
+    provider: ali_qwen
+    model: qwen-turbo
+    api_key: ${ALI_API_KEY}
+    max_tokens: 2048
+    temperature: 0.5
+    timeout: 60
+    retry_times: 1
+    stream: false
+
+  private_qwen: null
+  private_deepseek: null
+
+  routing_enabled: false
+  routing_rules: []
+
+# -------------------------------------------
+# 存储配置
+# -------------------------------------------
+storage:
+  upload_dir: ./tests/fixtures/uploads
+  parsed_dir: ./tests/fixtures/parsed
+  report_dir: ./tests/fixtures/reports
+  max_file_size: 10485760
+  allowed_extensions:
+    - .pdf
+    - .docx
+    - .jpg
+
+# -------------------------------------------
+# 应用配置
+# -------------------------------------------
+app:
+  app_name: 智能招投标审查平台-测试
+  debug: true
+  environment: testing
+  api_prefix: /api/v1
+  cors_origins:
+    - http://localhost:3000
+  log_level: DEBUG
+  log_file: ./tests/logs/test.log

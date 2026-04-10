@@ -1,0 +1,64 @@
+[project]
+name = "bid-tool-agents"
+version = "0.1.0"
+description = "智能招投标审查平台"
+authors = [{name = "Developer", email = "dev@example.com"}]
+requires-python = ">=3.10"
+dependencies = [
+    # Web/API
+    "fastapi>=0.109.0",
+    "uvicorn[standard]>=0.27.0",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+
+    # Agent & LLM
+    "langgraph>=0.1.0",
+    "langchain>=0.1.0",
+    "langchain-community>=0.1.0",
+    "langgraph-checkpoint-postgres>=0.1.0",
+
+    # Embedding
+    "flagembedding>=1.0.0",
+
+    # 文档解析
+    "unstructured>=0.10.0",
+    "unstructured[pdf]>=0.10.0",
+    "paddleocr>=2.7.0",
+    "paddlepaddle>=2.5.0",
+    "python-docx>=1.0.0",
+    "PyMuPDF>=1.23.0",
+
+    # 数据库
+    "sqlalchemy>=2.0.0",
+    "psycopg2-binary>=2.9.0",
+    "qdrant-client>=1.7.0",
+    "neo4j>=5.0.0",
+    "redis>=5.0.0",
+    "asyncpg>=0.29.0",
+
+    # NLP
+    "jieba>=0.42.0",
+
+    # 任务队列
+    "celery>=5.3.0",
+
+    # 配置
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0.0",
+
+    # 日志
+    "loguru>=0.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "httpx>=0.25.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

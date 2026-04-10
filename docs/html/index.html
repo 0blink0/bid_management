@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>首页 - 智能招投标审查平台</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-layout">
+    <!-- 顶部导航栏 -->
+    <header class="topbar">
+      <div class="topbar-logo">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+          <defs>
+            <linearGradient id="shieldMain" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1E5AA8"/>
+              <stop offset="50%" stop-color="#2C7BE5"/>
+              <stop offset="100%" stop-color="#1E5AA8"/>
+            </linearGradient>
+            <linearGradient id="goldBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFD700"/>
+              <stop offset="100%" stop-color="#B8860B"/>
+            </linearGradient>
+            <filter id="shieldShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#1E5AA8" flood-opacity="0.3"/>
+            </filter>
+            <filter id="badgeShadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.25"/>
+            </filter>
+          </defs>
+          <!-- 盾牌主体 -->
+          <g filter="url(#shieldShadow)">
+            <path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="url(#shieldMain)"/>
+          </g>
+          <!-- 盾牌顶部高光 -->
+          <path d="M22 2L4 9v10c0 10 8 17 18 17" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+          <!-- 盾牌底部暗部 -->
+          <path d="M22 36c8.5 0 15-5.5 16-13" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.5"/>
+          <!-- 盾牌边缘轮廓 -->
+          <path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <!-- 文档图标 -->
+          <g transform="translate(14, 11)">
+            <path d="M12 0H4a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6l-4-6z" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 0v6h4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 10h6M5 13h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <!-- 金色徽章 -->
+          <g filter="url(#badgeShadow)" transform="translate(28, 26)">
+            <circle cx="8" cy="8" r="7" fill="url(#goldBadge)" stroke="#B8860B" stroke-width="0.5"/>
+            <circle cx="8" cy="8" r="5.5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+            <path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>
+        <span class="topbar-title">智能招投标审查平台</span>
+      </div>
+      <div class="topbar-actions">
+        <div class="topbar-user-dropdown">
+          <div class="topbar-user">
+            <div class="topbar-user-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <span class="topbar-user-name">张三</span>
+            <svg class="topbar-user-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+          <div class="topbar-user-menu">
+            <a href="#" class="topbar-user-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+              </svg>
+              修改用户信息
+            </a>
+            <div class="topbar-user-menu-divider"></div>
+            <a href="#" class="topbar-user-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+              </svg>
+              退出
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- 主内容区 -->
+    <main class="main-wrapper">
+      <div class="main-content">
+        <div style="max-width: 1200px;">
+          <!-- 页面标题 -->
+          <h1 style="font-size: 24px; font-weight: 600; color: var(--gray-800); margin-bottom: 24px;">欢迎回来，张三</h1>
+
+          <!-- 统计卡片 -->
+          <div class="stats-grid" style="margin-bottom: 32px;">
+            <div class="stat-card">
+              <div class="stat-icon blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                  <path d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div class="stat-value">156</div>
+              <div class="stat-label">总审查任务</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div class="stat-value">128</div>
+              <div class="stat-label">已完成</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon orange">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div class="stat-value">12</div>
+              <div class="stat-label">进行中</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon red">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                  <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+              </div>
+              <div class="stat-value">16</div>
+              <div class="stat-label">风险预警</div>
+            </div>
+          </div>
+
+          <!-- 快捷入口 -->
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+              <h3 class="card-title">快捷入口</h3>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 20px;">
+              <a href="02-workspace.html" class="quick-entry-card">
+                <div class="quick-entry-icon blue">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                    <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                  </svg>
+                </div>
+                <div class="quick-entry-text">新建审查</div>
+              </a>
+              <a href="04b-duplicate-detection.html" class="quick-entry-card">
+                <div class="quick-entry-icon yellow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                    <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                  </svg>
+                </div>
+                <div class="quick-entry-text">围串标检测</div>
+              </a>
+              <a href="qualification-check.html" class="quick-entry-card">
+                <div class="quick-entry-icon green">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                  </svg>
+                </div>
+                <div class="quick-entry-text">资质核验</div>
+              </a>
+              <a href="06-report.html" class="quick-entry-card">
+                <div class="quick-entry-icon purple">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                    <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+                </div>
+                <div class="quick-entry-text">查看报告</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 最近项目 -->
+          <div class="card" style="padding: 0; overflow: hidden;">
+            <div class="card-header">
+              <h3 class="card-title">最近项目</h3>
+              <a href="#" class="card-link">查看全部</a>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>项目名称</th>
+                  <th>审查类型</th>
+                  <th>状态</th>
+                  <th>完成时间</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>某市政府云平台项目</td>
+                  <td>招标文件检测</td>
+                  <td><span class="status-badge success">已完成</span></td>
+                  <td>2026-03-27 10:35</td>
+                  <td><a href="06-report.html" class="table-link">查看报告</a></td>
+                </tr>
+                <tr>
+                  <td>某国企数据中心项目</td>
+                  <td>围串标检测</td>
+                  <td><span class="status-badge success">已完成</span></td>
+                  <td>2026-03-26 15:20</td>
+                  <td><a href="06-report.html" class="table-link">查看报告</a></td>
+                </tr>
+                <tr>
+                  <td>某高校智慧校园项目</td>
+                  <td>响应比对</td>
+                  <td><span class="status-badge warning">进行中</span></td>
+                  <td>--</td>
+                  <td><a href="05-reviewing.html" class="table-link">查看进度</a></td>
+                </tr>
+                <tr>
+                  <td>某医院信息化建设项目</td>
+                  <td>招标文件检测</td>
+                  <td><span class="status-badge success">已完成</span></td>
+                  <td>2026-03-25 09:45</td>
+                  <td><a href="06-report.html" class="table-link">查看报告</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <style>
+    .quick-entry-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 20px;
+      background: var(--gray-50);
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .quick-entry-card:hover {
+      background: var(--primary-lighter);
+      transform: translateY(-2px);
+    }
+    .quick-entry-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .quick-entry-icon.blue { background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); }
+    .quick-entry-icon.blue svg { stroke: white; }
+    .quick-entry-icon.green { background: linear-gradient(135deg, var(--success), #48BB78); }
+    .quick-entry-icon.green svg { stroke: white; }
+    .quick-entry-icon.yellow { background: linear-gradient(135deg, var(--warning), #FBBF24); }
+    .quick-entry-icon.yellow svg { stroke: white; }
+    .quick-entry-icon.purple { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+    .quick-entry-icon.purple svg { stroke: white; }
+    .quick-entry-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-700);
+    }
+    .table-link {
+      color: var(--primary-color);
+      font-size: 13px;
+      text-decoration: none;
+    }
+    .table-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <script src="sidebar.js"></script>
+</body>
+</html>

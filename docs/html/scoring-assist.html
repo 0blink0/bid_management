@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>辅助评标 - 智能招投标审查平台</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-layout">
+    <header class="topbar"><div class="topbar-logo"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40"><defs><linearGradient id="shieldMain" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1E5AA8"/><stop offset="50%" stop-color="#2C7BE5"/><stop offset="100%" stop-color="#1E5AA8"/></linearGradient><linearGradient id="goldBadge" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFD700"/><stop offset="100%" stop-color="#B8860B"/></linearGradient></defs><g filter="url(#shieldShadow)"><path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="url(#shieldMain)"/></g><g transform="translate(14, 11)"><path d="M12 0H4a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6l-4-6z" fill="none" stroke="white" stroke-width="1.8"/><path d="M12 0v6h4" stroke="white" stroke-width="1.8"/></g><g filter="url(#badgeShadow)" transform="translate(28, 26)"><circle cx="8" cy="8" r="7" fill="url(#goldBadge)"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.8"/></g></svg><span class="topbar-title">智能招投标审查平台</span></div><div class="topbar-actions"><div class="topbar-user-dropdown"><div class="topbar-user"><div class="topbar-user-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="topbar-user-name">张三</span></div></div></div></header>
+    <main class="main-wrapper"><div class="main-content"><div style="max-width: 1200px;">
+      <div class="page-header" style="margin-bottom: 24px;"><div><h1 class="page-title">辅助评标</h1><p class="text-muted mt-8">结合评分标准对投标文件进行客观项分析和评分建议</p></div></div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
+        <div class="stat-card"><div class="stat-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg></div><div class="stat-value">85.5</div><div class="stat-label">技术标得分</div></div>
+        <div class="stat-card"><div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div class="stat-value">92.0</div><div class="stat-label">商务标得分</div></div>
+        <div class="stat-card"><div class="stat-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div><div class="stat-value">88.2</div><div class="stat-label">综合得分</div></div>
+      </div>
+      <div class="card" style="padding: 0; overflow: hidden;">
+        <div class="card-header"><h3 class="card-title">评分项详情</h3></div>
+        <table class="data-table"><thead><tr><th>评分项</th><th>满分</th><th>AI评分</th><th>依据</th><th>操作</th></tr></thead>
+        <tbody>
+          <tr><td>技术方案完整性</td><td>20</td><td>18.5</td><td>方案包含完整的设计思路、实施计划...</td><td><a href="#" class="btn-link">查看原文</a></td></tr>
+          <tr><td>项目经验</td><td>15</td><td>13.0</td><td>提供3个类似项目业绩，累计金额超2000万</td><td><a href="#" class="btn-link">查看原文</a></td></tr>
+          <tr><td>报价合理性</td><td>25</td><td>22.0</td><td>报价在预算范围内，价格结构合理</td><td><a href="#" class="btn-link">查看原文</a></td></tr>
+          <tr><td>售后服务</td><td>10</td><td>9.0</td><td>提供3年质保，响应时间24小时内</td><td><a href="#" class="btn-link">查看原文</a></td></tr>
+        </tbody>
+      </table>
+    </div></div></main>
+  </div>
+  <script src="sidebar.js"></script>
+</body>
+</html>

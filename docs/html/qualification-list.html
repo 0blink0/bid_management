@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>资质核验 - 智能招投标审查平台</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-layout">
+    <!-- 顶部导航栏 -->
+    <header class="topbar">
+      <div class="topbar-logo">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+          <defs>
+            <linearGradient id="shieldMain" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1E5AA8"/>
+              <stop offset="50%" stop-color="#2C7BE5"/>
+              <stop offset="100%" stop-color="#1E5AA8"/>
+            </linearGradient>
+            <linearGradient id="goldBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFD700"/>
+              <stop offset="100%" stop-color="#B8860B"/>
+            </linearGradient>
+            <filter id="shieldShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#1E5AA8" flood-opacity="0.3"/>
+            </filter>
+            <filter id="badgeShadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.25"/>
+            </filter>
+          </defs>
+          <g filter="url(#shieldShadow)">
+            <path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="url(#shieldMain)"/>
+          </g>
+          <path d="M22 2L4 9v10c0 10 8 17 18 17" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+          <path d="M22 36c8.5 0 15-5.5 16-13" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.5"/>
+          <path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <g transform="translate(14, 11)">
+            <path d="M12 0H4a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6l-4-6z" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 0v6h4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 10h6M5 13h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <g filter="url(#badgeShadow)" transform="translate(28, 26)">
+            <circle cx="8" cy="8" r="7" fill="url(#goldBadge)" stroke="#B8860B" stroke-width="0.5"/>
+            <circle cx="8" cy="8" r="5.5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+            <path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>
+        <span class="topbar-title">智能招投标审查平台</span>
+      </div>
+      <div class="topbar-actions">
+        <div class="topbar-user-dropdown">
+          <div class="topbar-user">
+            <div class="topbar-user-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <span class="topbar-user-name">张三</span>
+            <svg class="topbar-user-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+          <div class="topbar-user-menu">
+            <a href="#" class="topbar-user-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+              </svg>
+              修改用户信息
+            </a>
+            <div class="topbar-user-menu-divider"></div>
+            <a href="#" class="topbar-user-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+              </svg>
+              退出
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="main-wrapper">
+      <div class="main-content">
+        <div style="max-width: 1200px;">
+          <div class="page-header" style="margin-bottom: 24px;">
+            <div>
+              <h1 class="page-title">资质核验</h1>
+              <p class="text-muted mt-8">对企业、人员、证书等资质信息进行有效性核验</p>
+            </div>
+          </div>
+
+          <!-- 项目列表 -->
+          <div class="card" style="padding: 0; overflow: hidden;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>项目名称</th>
+                  <th>招标单位</th>
+                  <th>投标单位</th>
+                  <th>有效资质</th>
+                  <th>已过期</th>
+                  <th>风险情况</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div style="font-weight: 500; color: var(--gray-800);">某市政府云平台建设项目</div>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">某市人民政府</div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--primary-color);">3</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">家</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--success);">8</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">项</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--danger);">1</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">项</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="status-badge warning">1项临近过期</span>
+                  </td>
+                  <td>
+                    <a href="qualification-check.html" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">
+                      进入核验
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" style="margin-left: 4px;">
+                        <path d="M9 5l7 7-7 7"/>
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="font-weight: 500; color: var(--gray-800);">某国企数据中心采购项目</div>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">某国有企业集团</div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--primary-color);">5</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">家</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--success);">12</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">项</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--danger);">3</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">项</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="status-badge danger">2项已过期</span>
+                  </td>
+                  <td>
+                    <a href="qualification-check.html" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">
+                      进入核验
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" style="margin-left: 4px;">
+                        <path d="M9 5l7 7-7 7"/>
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="font-weight: 500; color: var(--gray-800);">某高校智慧校园项目</div>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">某大学</div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--primary-color);">8</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">家</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--success);">15</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">项</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--danger);">0</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">项</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="status-badge success">全部有效</span>
+                  </td>
+                  <td>
+                    <a href="qualification-check.html" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">
+                      进入核验
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" style="margin-left: 4px;">
+                        <path d="M9 5l7 7-7 7"/>
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="font-weight: 500; color: var(--gray-800);">某医院信息化建设采购</div>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">某人民医院</div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--primary-color);">4</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">家</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--success);">10</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">项</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--danger);">2</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">项</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="status-badge danger">1项单位不一致</span>
+                  </td>
+                  <td>
+                    <a href="qualification-check.html" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">
+                      进入核验
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" style="margin-left: 4px;">
+                        <path d="M9 5l7 7-7 7"/>
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="font-weight: 500; color: var(--gray-800);">某市智慧交通系统项目</div>
+                  </td>
+                  <td>
+                    <div style="font-size: 13px; color: var(--gray-700);">某市交通局</div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--primary-color);">12</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">家</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--success);">20</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">项</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 20px; font-weight: 600; color: var(--danger);">5</span>
+                      <span style="font-size: 13px; color: var(--gray-500);">项</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="status-badge danger">3项已过期</span>
+                  </td>
+                  <td>
+                    <a href="qualification-check.html" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">
+                      进入核验
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" style="margin-left: 4px;">
+                        <path d="M9 5l7 7-7 7"/>
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- 分页 -->
+            <div class="pagination-wrapper">
+              <div class="pagination-info">共 8 个项目，第 1/1 页</div>
+              <div class="pagination-controls">
+                <button class="pagination-btn icon-only" disabled>首页</button>
+                <button class="pagination-btn icon-only" disabled>上一页</button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn icon-only" disabled>下一页</button>
+                <button class="pagination-btn icon-only" disabled>末页</button>
+              </div>
+              <div class="pagination-jump">
+                <span class="pagination-jump-label">跳转到</span>
+                <input type="number" class="pagination-jump-input" min="1" value="1">
+                <button class="pagination-jump-btn">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="sidebar.js"></script>
+</body>
+</html>

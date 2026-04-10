@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>审查中 - 智能招投标审查平台</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .progress-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .progress-step-label {
+      width: 80px;
+      font-size: 14px;
+      color: var(--gray-600);
+    }
+    .progress-step-bar {
+      flex: 1;
+      height: 8px;
+      background: var(--gray-200);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-step-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+    .progress-step-status {
+      width: 60px;
+      font-size: 13px;
+      text-align: right;
+    }
+    .progress-step-status.completed { color: var(--success); }
+    .progress-step-status.processing { color: var(--primary-color); font-weight: 600; }
+    .progress-step-status.waiting { color: var(--gray-400); }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <!-- 顶部导航栏 -->
+    <header class="topbar">
+      <div class="topbar-logo">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+          <defs>
+            <linearGradient id="shieldMain" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1E5AA8"/>
+              <stop offset="50%" stop-color="#2C7BE5"/>
+              <stop offset="100%" stop-color="#1E5AA8"/>
+            </linearGradient>
+            <linearGradient id="goldBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFD700"/>
+              <stop offset="100%" stop-color="#B8860B"/>
+            </linearGradient>
+            <filter id="shieldShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#1E5AA8" flood-opacity="0.3"/>
+            </filter>
+            <filter id="badgeShadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.25"/>
+            </filter>
+          </defs>
+          <g filter="url(#shieldShadow)">
+            <path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="url(#shieldMain)"/>
+          </g>
+          <path d="M22 2L4 9v10c0 10 8 17 18 17" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+          <path d="M22 36c8.5 0 15-5.5 16-13" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.5"/>
+          <path d="M22 2L4 9v10c0 10 8 17 18 17s18-7 18-17V9L22 2z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <g transform="translate(14, 11)">
+            <path d="M12 0H4a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6l-4-6z" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 0v6h4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 10h6M5 13h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <g filter="url(#badgeShadow)" transform="translate(28, 26)">
+            <circle cx="8" cy="8" r="7" fill="url(#goldBadge)" stroke="#B8860B" stroke-width="0.5"/>
+            <circle cx="8" cy="8" r="5.5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+            <path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>
+        <span class="topbar-title">智能招投标审查平台</span>
+      </div>
+      <div class="topbar-actions">
+        <div class="topbar-user-dropdown">
+          <div class="topbar-user">
+            <div class="topbar-user-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <span class="topbar-user-name">张三</span>
+            <svg class="topbar-user-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+          <div class="topbar-user-menu">
+            <a href="#" class="topbar-user-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+              </svg>
+              修改用户信息
+            </a>
+            <div class="topbar-user-menu-divider"></div>
+            <a href="#" class="topbar-user-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+              </svg>
+              退出
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- 主内容区 -->
+    <main class="main-wrapper">
+      <div class="main-content">
+        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+          <!-- 标题 -->
+          <h1 class="page-title" style="margin-bottom: 8px;">正在智能审查中</h1>
+          <p class="text-muted mb-24">请稍候，预计剩余 <span style="color: var(--primary-color); font-weight: 600;">约 3 分钟</span></p>
+
+          <!-- 进度卡片 -->
+          <div class="card">
+            <div class="progress-steps">
+              <div class="progress-step">
+                <span class="progress-step-label">文件解析</span>
+                <div class="progress-step-bar">
+                  <div class="progress-step-fill" style="width: 100%;"></div>
+                </div>
+                <span class="progress-step-status completed">✓</span>
+              </div>
+
+              <div class="progress-step">
+                <span class="progress-step-label">合规检测</span>
+                <div class="progress-step-bar">
+                  <div class="progress-step-fill" style="width: 78%;"></div>
+                </div>
+                <span class="progress-step-status processing">60%</span>
+              </div>
+
+              <div class="progress-step">
+                <span class="progress-step-label">响应比对</span>
+                <div class="progress-step-bar">
+                  <div class="progress-step-fill" style="width: 35%;"></div>
+                </div>
+                <span class="progress-step-status processing">35%</span>
+              </div>
+
+              <div class="progress-step">
+                <span class="progress-step-label">资质核验</span>
+                <div class="progress-step-bar">
+                  <div class="progress-step-fill" style="width: 0%;"></div>
+                </div>
+                <span class="progress-step-status waiting">等待</span>
+              </div>
+
+              <div class="progress-step">
+                <span class="progress-step-label">风险识别</span>
+                <div class="progress-step-bar">
+                  <div class="progress-step-fill" style="width: 0%;"></div>
+                </div>
+                <span class="progress-step-status waiting">等待</span>
+              </div>
+
+              <div class="progress-step">
+                <span class="progress-step-label">生成报告</span>
+                <div class="progress-step-bar">
+                  <div class="progress-step-fill" style="width: 0%;"></div>
+                </div>
+                <span class="progress-step-status waiting">等待</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 操作按钮 -->
+          <div class="flex gap-16 justify-center mt-24">
+            <a href="06-report.html" class="btn btn-primary">查看报告</a>
+            <button onclick="showCancelModal()" class="btn btn-secondary">取消审查</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 取消确认模态框 -->
+    <div class="modal-overlay" id="cancelModal">
+      <div class="modal" style="text-align: center;">
+        <div style="width: 56px; height: 56px; margin: 0 auto 20px; background: var(--warning-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2" width="28" height="28">
+            <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+        </div>
+        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 12px;">确认取消审查？</h3>
+        <p style="font-size: 14px; color: var(--gray-500); margin-bottom: 24px;">已完成的检查结果将保存为草稿</p>
+        <div class="flex gap-16 justify-center">
+          <button onclick="hideCancelModal()" class="btn btn-secondary">继续审查</button>
+          <button onclick="confirmCancel()" class="btn btn-danger">确认取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showCancelModal() {
+      document.getElementById('cancelModal').classList.add('active');
+    }
+    function hideCancelModal() {
+      document.getElementById('cancelModal').classList.remove('active');
+    }
+    function confirmCancel() {
+      hideCancelModal();
+      window.location.href = '02-workspace.html';
+    }
+  </script>
+  <script src="sidebar.js"></script>
+</body>
+</html>
