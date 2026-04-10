@@ -9,7 +9,7 @@
 - **Agent**: LangGraph StateGraph + 四层记忆机制
 - **LLM**: 阿里云API / 私有化千问 / DeepSeek
 - **数据库**: PostgreSQL + Qdrant + Neo4j + Redis
-- **文档解析**: Unstructured.io + PaddleOCR
+- **文档解析**: GLM-ocr
 
 ## 项目结构
 
