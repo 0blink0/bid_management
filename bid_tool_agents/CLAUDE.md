@@ -60,7 +60,6 @@
 | `npm test` | 运行测试套件 |
 | `npm run lint` | 检查代码风格 |
 | `npm run build` | 构建生产版本 |
-| `npm run migrate` | 执行数据库迁移 |
 
 ## 已知问题与解决方案
 
