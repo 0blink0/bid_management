@@ -65,9 +65,11 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { NForm, NFormItem, NInput, NButton, useMessage } from 'naive-ui'
 import type { FormInst } from 'naive-ui'
+import { useUserStore } from '@/stores/user'
 
 const router = useRouter()
 const message = useMessage()
+const userStore = useUserStore()
 
 const formRef = ref<FormInst | null>(null)
 const loading = ref(false)
@@ -90,19 +92,43 @@ const rules = {
   }
 }
 
-const handleLogin = () => {
-  formRef.value?.validate((errors) => {
-    if (errors) return
+const handleLogin = async () => {
+  try {
+    await formRef.value?.validate()
 
     loading.value = true
 
-    // Simulate login
-    setTimeout(() => {
-      loading.value = false
-      message.success('登录成功')
-      router.push('/home')
-    }, 1000)
-  })
+    const response = await fetch('/api/v1/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formValue.value)
+    })
+
+    if (!response.ok) {
+      const error = await response.json()
+      throw new Error(error.message || '登录失败')
+    }
+
+    const data = await response.json()
+
+    // Validate response format
+    if (!data.token) {
+      throw new Error('登录响应格式错误')
+    }
+
+    // Store token and user info
+    userStore.setToken(data.token)
+    userStore.setUser(data.user || null)
+
+    message.success('登录成功')
+    router.push('/home')
+  } catch (error: any) {
+    message.error(error.message || '登录失败，请检查用户名和密码')
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 

@@ -118,9 +118,21 @@ const formatTime = (timestamp: number) => {
   })
 }
 
+// HTML转义防止XSS
+const escapeHtml = (str: string) => {
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  }
+  return str.replace(/[&<>"']/g, c => map[c])
+}
+
 // 渲染Markdown（简化版）
 const renderMarkdown = (text: string) => {
-  return text
+  return escapeHtml(text)
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
     .replace(/`(.*?)`/g, '<code>$1</code>')

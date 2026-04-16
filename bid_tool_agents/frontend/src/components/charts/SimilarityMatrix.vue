@@ -99,9 +99,21 @@ const handleCellClick = (row: number, col: number, value: number) => {
   emit('cellClick', row, col, value)
 }
 
+// HTML转义防止XSS
+const escapeHtml = (str: string) => {
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  }
+  return str.replace(/[&<>"']/g, c => map[c])
+}
+
 const highlightText = (text: string) => {
-  // 简化的高亮显示
-  return text || '未提供原文'
+  // 转义HTML防止XSS
+  return escapeHtml(text) || '未提供原文'
 }
 </script>
 

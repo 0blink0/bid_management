@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -178,6 +179,21 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+// Navigation guard for authentication
+router.beforeEach((to, from, next) => {
+  const userStore = useUserStore()
+
+  if (to.meta.requiresAuth && !userStore.isAuthenticated) {
+    // Redirect to login if not authenticated
+    next('/login')
+  } else if (to.path === '/login' && userStore.isAuthenticated) {
+    // Redirect to home if already authenticated
+    next('/home')
+  } else {
+    next()
+  }
 })
 
 export default router
