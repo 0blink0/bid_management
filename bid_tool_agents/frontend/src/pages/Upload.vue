@@ -6,7 +6,7 @@
           multiple
           :max="10"
           action="/api/v1/files/upload"
-          :headers="{ Authorization: 'Bearer token' }"
+          :headers="authHeaders"
           @before-upload="beforeUpload"
         >
           <n-button>选择文件</n-button>
@@ -43,12 +43,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useUserStore } from '@/stores/user'
 
 interface UploadingFile {
   name: string
   percentage: number
 }
+
+const userStore = useUserStore()
+
+const authHeaders = computed(() => {
+  if (!userStore.token) return {}
+  return { Authorization: `Bearer ${userStore.token}` }
+})
 
 const uploadingFiles = ref<UploadingFile[]>([])
 
