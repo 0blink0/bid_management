@@ -10,3 +10,16 @@
 /zhaobiao
 /bid_tool_agents/.env
 /Bdoc
+/.claude/.DS_Store
+
+# 依赖目录 (Dependencies)
+/bid_tool_agents/frontend/node_modules
+/bid_tool_agents/frontend/jspm_packages
+
+# 构建输出目录 (Build Outputs)
+/bid_tool_agents/frontend/dist
+/bid_tool_agents/frontend/dist-ssr
+/bid_tool_agents/frontend/build
+/bid_tool_agents/frontend/out
+/bid_tool_agents/frontend/*.local
+

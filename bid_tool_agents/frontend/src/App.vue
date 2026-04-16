@@ -29,9 +29,15 @@ const themeOverrides = {
   box-sizing: border-box;
 }
 
-html, body, #app {
+html, body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+#app {
+  width: 100%;
+  min-height: 100vh;
 }
 </style>
