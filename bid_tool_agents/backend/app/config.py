@@ -128,6 +128,14 @@ class AppConfig(BaseSettings):
     log_file: str = "./logs/app.log"
 
 
+class KnowledgeQueryConfig(BaseSettings):
+    """知识检索接口配置。"""
+
+    default_knowledge_type: str = "laws_regulations"
+    default_limit: int = 10
+    max_limit: int = 50
+
+
 class Settings(BaseSettings):
     """统一配置类"""
     ENV: str = Field(default="development", alias="ENV")
@@ -139,6 +147,7 @@ class Settings(BaseSettings):
     llm: LLMConfig = LLMConfig()
     storage: StorageConfig = StorageConfig()
     app: AppConfig = AppConfig()
+    knowledge_query: KnowledgeQueryConfig = KnowledgeQueryConfig()
 
     class Config:
         env_file = ".env"

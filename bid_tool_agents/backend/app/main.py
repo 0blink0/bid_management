@@ -6,7 +6,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from app.config import get_settings
-from app.api.v1 import router as api_router
+from app.api.v1.router import router as api_router
+from app.tools.database.qdrant import init_qdrant
 
 
 @asynccontextmanager
@@ -16,6 +17,12 @@ async def lifespan(app: FastAPI):
     # 启动时初始化
     print(f"Starting {settings.app.app_name}...")
     print(f"Environment: {settings.ENV}")
+    try:
+        qdrant = init_qdrant(settings.vector_db.url, settings.vector_db.port)
+        qdrant.client.get_collections()
+        print("Qdrant initialized.")
+    except Exception as exc:  # noqa: BLE001
+        print(f"Qdrant init warning: {exc}")
     yield
     # 关闭时清理
     print("Shutting down...")
