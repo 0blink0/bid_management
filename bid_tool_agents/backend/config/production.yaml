@@ -20,7 +20,7 @@ vector_db:
   host: ${QDRANT_HOST}
   port: 6333
   collection_name: bid_documents
-  vector_size: 1536
+  vector_size: 1024
 
 graph_db:
   host: ${NEO4J_HOST}

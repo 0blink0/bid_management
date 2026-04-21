@@ -18,7 +18,8 @@ from app.tools.database.qdrant import QdrantStore
 
 def _collect_jsonl_files(input_dir: str) -> list[str]:
     files = sorted(Path(input_dir).glob("*.jsonl"))
-    return [str(path) for path in files]
+    # 过滤掉带下划线的标注/中间文件，避免误入库污染 chunk_id 稳定性。
+    return [str(path) for path in files if "_" not in path.name]
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -53,12 +54,17 @@ def main() -> int:
         input_files = _collect_jsonl_files(args.input_dir)
         records = load_jsonl_records(input_files, version=args.version)
         settings = get_settings()
-        store = QdrantStore(url=settings.vector_db.url, port=settings.vector_db.port)
+        store = QdrantStore(
+            url=settings.vector_db.url,
+            port=settings.vector_db.port,
+            api_key=settings.vector_db.api_key,
+        )
         result = rebuild_laws_collection(
             records=records,
             force=args.force,
             store=store,
             audit_path=args.audit_path,
+            batch_size=16,
         )
         output = {
             "version": result.version,

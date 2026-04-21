@@ -46,24 +46,24 @@ def file_sha256(path: Path) -> str:
 
 
 def evaluate_with_client(cases_path: str | Path) -> dict[str, Any]:
-    client = TestClient(create_app())
-
-    def query_fn(query: str, knowledge_type: str, limit: int) -> dict[str, Any]:
-        response = client.post(
-            "/api/v1/knowledge/query",
-            json={"query": query, "knowledge_type": knowledge_type, "limit": limit},
-        )
-        body = response.json()
-        if response.status_code != 200:
-            message = body.get("message", "knowledge query failed")
-            request_id = str(body.get("request_id", ""))
-            error_code = body.get("error_code", "UNKNOWN_ERROR")
-            raise QueryDependencyError(f"{error_code}: {message}", request_id=request_id)
-        return body
-
     case_file = Path(cases_path)
     cases = load_eval_cases(case_file)
-    case_results = evaluate_cases(cases, query_fn)
+
+    with TestClient(create_app()) as client:
+        def query_fn(query: str, knowledge_type: str, limit: int) -> dict[str, Any]:
+            response = client.post(
+                "/api/v1/knowledge/query",
+                json={"query": query, "knowledge_type": knowledge_type, "limit": limit},
+            )
+            body = response.json()
+            if response.status_code != 200:
+                message = body.get("message", "knowledge query failed")
+                request_id = str(body.get("request_id", ""))
+                error_code = body.get("error_code", "UNKNOWN_ERROR")
+                raise QueryDependencyError(f"{error_code}: {message}", request_id=request_id)
+            return body
+
+        case_results = evaluate_cases(cases, query_fn)
     return build_gate_report(case_file, case_results)
 
 

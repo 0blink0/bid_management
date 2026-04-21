@@ -20,7 +20,7 @@ vector_db:
   host: localhost
   port: 6333
   collection_name: bid_documents_test
-  vector_size: 1536
+  vector_size: 1024
 
 graph_db:
   host: localhost

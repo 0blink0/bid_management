@@ -18,7 +18,11 @@ async def lifespan(app: FastAPI):
     print(f"Starting {settings.app.app_name}...")
     print(f"Environment: {settings.ENV}")
     try:
-        qdrant = init_qdrant(settings.vector_db.url, settings.vector_db.port)
+        qdrant = init_qdrant(
+            settings.vector_db.url,
+            settings.vector_db.port,
+            settings.vector_db.api_key,
+        )
         qdrant.client.get_collections()
         print("Qdrant initialized.")
     except Exception as exc:  # noqa: BLE001

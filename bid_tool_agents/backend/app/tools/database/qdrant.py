@@ -7,8 +7,13 @@ from qdrant_client.models import Distance, VectorParams, PointStruct
 class QdrantStore:
     """Qdrant 向量数据库封装。"""
 
-    def __init__(self, url: str, port: int = 6333):
-        self.client = QdrantNativeClient(url=url, port=port)
+    def __init__(self, url: str, port: Optional[int] = 6333, api_key: Optional[str] = None):
+        kwargs: Dict[str, Any] = {"url": url}
+        if port is not None:
+            kwargs["port"] = port
+        if api_key:
+            kwargs["api_key"] = api_key
+        self.client = QdrantNativeClient(**kwargs)
 
     def create_collection(
         self,
@@ -47,12 +52,22 @@ class QdrantStore:
         score_threshold: Optional[float] = None
     ) -> List[Dict[str, Any]]:
         """搜索"""
-        results = self.client.search(
-            collection_name=collection_name,
-            query_vector=query_vector,
-            limit=limit,
-            score_threshold=score_threshold
-        )
+        # qdrant-client 新旧版本 API 名称不同，统一在此做兼容。
+        if hasattr(self.client, "search"):
+            results = self.client.search(
+                collection_name=collection_name,
+                query_vector=query_vector,
+                limit=limit,
+                score_threshold=score_threshold
+            )
+        else:
+            response = self.client.query_points(
+                collection_name=collection_name,
+                query=query_vector,
+                limit=limit,
+                score_threshold=score_threshold
+            )
+            results = getattr(response, "points", response)
         return [
             {
                 "id": r.id,
@@ -83,10 +98,10 @@ class QdrantStore:
 _qdrant: Optional[QdrantStore] = None
 
 
-def init_qdrant(url: str, port: int = 6333) -> QdrantStore:
+def init_qdrant(url: str, port: Optional[int] = 6333, api_key: Optional[str] = None) -> QdrantStore:
     """初始化 Qdrant 客户端。"""
     global _qdrant
-    _qdrant = QdrantStore(url=url, port=port)
+    _qdrant = QdrantStore(url=url, port=port, api_key=api_key)
     return _qdrant
 
 

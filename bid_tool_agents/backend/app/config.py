@@ -38,11 +38,15 @@ class VectorDBConfig(BaseSettings):
     """向量数据库（Qdrant）配置"""
     host: str = "localhost"
     port: int = 6333
+    endpoint: Optional[str] = None
+    api_key: Optional[str] = None
     collection_name: str = "bid_documents"
-    vector_size: int = 1536
+    vector_size: int = 1024
 
     @property
     def url(self) -> str:
+        if self.endpoint and self.endpoint.strip():
+            return self.endpoint.strip()
         return f"http://{self.host}:{self.port}"
 
 

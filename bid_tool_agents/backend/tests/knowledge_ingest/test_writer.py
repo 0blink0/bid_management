@@ -78,7 +78,7 @@ def test_rebuild_call_order_and_collection(tmp_path: Path):
 
     assert not result.errors
     assert store.calls[0] == ("delete_collection", "laws_regulations")
-    assert store.calls[1] == ("create_collection", "laws_regulations", 1536)
+    assert store.calls[1] == ("create_collection", "laws_regulations", VECTOR_SIZE)
     assert store.calls[2][0] == "upsert"
     assert sum(store.upsert_payload_sizes) == 3
 

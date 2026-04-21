@@ -19,6 +19,8 @@ database:
 vector_db:
   host: localhost
   port: 6333
+  endpoint: https://56d3914d-2f61-42f1-bed2-6358751515d6.us-east-1-1.aws.cloud.qdrant.io
+  api_key: ${QDRANT_API_KEY}
   collection_name: bid_documents_dev
   vector_size: 1536
 

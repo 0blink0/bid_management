@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from typing import List
+from uuid import NAMESPACE_URL, uuid5
 
 from qdrant_client.models import PointStruct
 
@@ -34,7 +35,7 @@ def _to_points(records: List[LawRecord], vectors: List[List[float]]) -> List[Poi
         }
         points.append(
             PointStruct(
-                id=record.chunk_id,
+                id=str(uuid5(NAMESPACE_URL, f"laws_regulations:{record.chunk_id}")),
                 vector=vector,
                 payload=payload,
             )
@@ -59,7 +60,7 @@ def rebuild_laws_collection(
     summary = IngestSummary(total=len(records), success=0, failed=0, duration_seconds=0.0)
     try:
         if vector_size != VECTOR_SIZE:
-            raise ValueError("vector_size must be 1536")
+            raise ValueError(f"vector_size must be {VECTOR_SIZE}")
         if not force:
             raise ValueError("force=true required for rebuild")
 
